@@ -13,9 +13,23 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
-	//t_tmp "text/template"
+	t_tmp "text/template"
 	//h_tmp "html/template"
 )
+
+func build_latex(cv Resume) error {
+	t := t_tmp.Must(t_tmp.New("template.tex").Delims("#(",")#").ParseFiles("template.tex"))
+	name := fmt.Sprintf("%s_%s", cv.Basics.First, cv.Basics.Last)
+	
+	file, err := os.Create( fmt.Sprintf("%s.tex", name) )
+	if err!=nil { return err } 
+	defer file.Close()
+	
+	err = t.Execute(file, cv)
+	if err!=nil { return err }
+	
+	return nil
+}
 
 func main() {
 	
@@ -34,5 +48,8 @@ func main() {
 		panic(err)
 	}
 	
-	fmt.Printf("Parsed cv for %s.\n",cv.Basics.Name)
+	err = build_latex(cv)
+	if err!=nil { panic(err) }
+	
+	fmt.Printf("Parsed cv for %s %s.\n",cv.Basics.First, cv.Basics.Last)
 }

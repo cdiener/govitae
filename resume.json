@@ -1,6 +1,7 @@
 {
   "basics": {
-    "name": "Richard Hendriks",
+    "firstname": "Richard",
+    "lastname": "Hendrik",
     "label": "Programmer",
     "picture": "",
     "email": "richard.hendriks@mail.com",
@@ -16,12 +17,12 @@
     },
     "profiles": [
       {
-        "network": "Twitter",
+        "network": "twitter",
         "username": "neutralthoughts",
         "url": ""
       },
       {
-        "network": "SoundCloud",
+        "network": "soundcloud",
         "username": "dandymusicnl",
         "url": "https://soundcloud.com/dandymusicnl"
       }

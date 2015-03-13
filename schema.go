@@ -23,7 +23,8 @@ type Profile struct {
 }
 
 type BasicInfo struct {
-	Name string `json:"name"`
+	First string `json:"firstname"`
+	Last string `json:"lastname"`
 	Label string `json:"label"`
 	Picture string `json:"picture"`
 	Email string `json:"email"`
