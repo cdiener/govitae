@@ -73,6 +73,7 @@ type Award struct {
 }
 
 type Publication struct {
+    Authors []string `json:"authors"`
 	Title string `json:"name"`
 	Publisher string `json:"publisher"`
 	Date string `json:"releaseDate"`

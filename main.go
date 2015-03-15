@@ -13,6 +13,7 @@ import (
 	"fmt"
 	"io/ioutil"
 	"os"
+	"strings"
 	t_tmp "text/template"
 	//h_tmp "html/template"
 )
@@ -27,6 +28,18 @@ func build_latex(cv Resume) error {
 	
 	err = t.Execute(file, cv)
 	if err!=nil { return err }
+	
+	if len(cv.Publications)>0 {
+		fs := t_tmp.FuncMap{ "join": strings.Join, }
+		t = t_tmp.Must( t_tmp.New("template.bib").Delims("#(",")#").
+				Funcs(fs).ParseFiles("template.bib") )
+		bib, err := os.Create( fmt.Sprintf("%s.bib", name) )
+		if err!=nil { return err } 
+		defer bib.Close()
+		
+		err = t.Execute(bib, cv)
+		if err!=nil { return err }
+	}
 	
 	return nil
 }

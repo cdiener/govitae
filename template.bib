@@ -1,0 +1,10 @@
+#(range .Publications)#
+@article{,
+	#(if gt (len .Authors) 0)#author = {#(join .Authors " and ")#},#(end)# 
+	title = {#(.Title)#},
+	journal = {#(.Publisher)#},
+	year = {#(.Date)#},
+	url = {#(.Url)#},
+	abstract = {#(.Summary)#}
+}
+#(end)#
