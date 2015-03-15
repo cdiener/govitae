@@ -19,7 +19,9 @@ import (
 )
 
 func build_latex(cv Resume) error {
-	t := t_tmp.Must(t_tmp.New("template.tex").Delims("#(",")#").ParseFiles("template.tex"))
+	fs := t_tmp.FuncMap{ "join": strings.Join, }
+	t := t_tmp.Must(t_tmp.New("template.tex").Delims("#(",")#").
+			Funcs(fs).ParseFiles("template.tex"))
 	name := fmt.Sprintf("%s_%s", cv.Basics.First, cv.Basics.Last)
 	
 	file, err := os.Create( fmt.Sprintf("%s.tex", name) )
@@ -30,7 +32,6 @@ func build_latex(cv Resume) error {
 	if err!=nil { return err }
 	
 	if len(cv.Publications)>0 {
-		fs := t_tmp.FuncMap{ "join": strings.Join, }
 		t = t_tmp.Must( t_tmp.New("template.bib").Delims("#(",")#").
 				Funcs(fs).ParseFiles("template.bib") )
 		bib, err := os.Create( fmt.Sprintf("%s.bib", name) )
