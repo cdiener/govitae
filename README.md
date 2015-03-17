@@ -1,21 +1,22 @@
 govitae
 ======
 
-Render JSON résumés with Go.
+Render résumés with Go. Write it once and render it on the Go.
 
 Current status
 -------------
 
 - [x] schema implemented
-- [x] parser working
-- [ ] text output working
+- [x] JSON parser working
+- [x] YAML parser working
+- [x] text output working
+- [x] Latex output working
 - [ ] HTML output working
-- [ ] Latex output working
 
 What it does
 -----------
 
-Write your cv once in JSON and have it rendered by govitae in various formats:
+Write your cv once in JSON or YAML and have it rendered by govitae in various formats:
 
 - a nice looking web page
 - a minimal but stylish text version

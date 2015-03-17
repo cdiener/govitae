@@ -103,7 +103,7 @@ Highlights:%
 \cvitem{#(.Language)#}{#(.Fluency)#}
 #(end)##(end)#
 
-#(if gt (len .Awards) 0)#\section{Skills}
+#(if gt (len .Skills) 0)#\section{Skills}
 #(range .Skills)#
 \cvitemwithcomment{#(.Name)#}{#(join .Keywords ", ")#}{#(.Level)#}
 #(end)##(end)#
@@ -123,7 +123,7 @@ Highlights:%
 %  to redefine the heading string ("Publications"): \renewcommand{\refname}{Articles}
 \nocite{*}
 \bibliographystyle{unsrt}
-\bibliography{#(.Basics.First)#_#(.Basics.Last)#}                        % 'publications' is the name of a BibTeX file
+\bibliography{pubs.bib}                        % 'publications' is the name of a BibTeX file
 
 % Publications from a BibTeX file using the multibib package
 %\section{Publications}
