@@ -1,8 +1,8 @@
 /*
  * main.go
- * 
+ *
  * Copyright 2015 Christian Diener <ch.diener@gmail.com>
- * 
+ *
  * MIT license. See LICENSE for more information.
  */
 
@@ -19,51 +19,61 @@ import (
 )
 
 func build_latex(cv Resume) error {
-	fs := t_tmp.FuncMap{ "join": strings.Join, }
-	t := t_tmp.Must(t_tmp.New("template.tex").Delims("#(",")#").
-			Funcs(fs).ParseFiles("template.tex"))
+	fs := t_tmp.FuncMap{"join": strings.Join}
+	t := t_tmp.Must(t_tmp.New("template.tex").Delims("#(", ")#").
+		Funcs(fs).ParseFiles("template.tex"))
 	name := fmt.Sprintf("%s_%s", cv.Basics.First, cv.Basics.Last)
-	
-	file, err := os.Create( fmt.Sprintf("%s.tex", name) )
-	if err!=nil { return err } 
-	defer file.Close()
-	
-	err = t.Execute(file, cv)
-	if err!=nil { return err }
-	
-	if len(cv.Publications)>0 {
-		t = t_tmp.Must( t_tmp.New("template.bib").Delims("#(",")#").
-				Funcs(fs).ParseFiles("template.bib") )
-		bib, err := os.Create( fmt.Sprintf("%s.bib", name) )
-		if err!=nil { return err } 
-		defer bib.Close()
-		
-		err = t.Execute(bib, cv)
-		if err!=nil { return err }
+
+	file, err := os.Create(fmt.Sprintf("%s.tex", name))
+	if err != nil {
+		return err
 	}
-	
+	defer file.Close()
+
+	err = t.Execute(file, cv)
+	if err != nil {
+		return err
+	}
+
+	if len(cv.Publications) > 0 {
+		t = t_tmp.Must(t_tmp.New("template.bib").Delims("#(", ")#").
+			Funcs(fs).ParseFiles("template.bib"))
+		bib, err := os.Create(fmt.Sprintf("%s.bib", name))
+		if err != nil {
+			return err
+		}
+		defer bib.Close()
+
+		err = t.Execute(bib, cv)
+		if err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
 func main() {
-	
-	if len(os.Args)<2 {
+
+	if len(os.Args) < 2 {
 		panic("Need a json file to parse :(")
 	}
-	
+
 	text, err := ioutil.ReadFile(os.Args[1])
-	if err!=nil {
+	if err != nil {
 		panic(err)
 	}
-	
+
 	var cv Resume
 	err = json.Unmarshal(text, &cv)
 	if err != nil {
 		panic(err)
 	}
-	
+
 	err = build_latex(cv)
-	if err!=nil { panic(err) }
-	
-	fmt.Printf("Parsed cv for %s %s.\n",cv.Basics.First, cv.Basics.Last)
+	if err != nil {
+		panic(err)
+	}
+
+	fmt.Printf("Parsed cv for %s %s.\n", cv.Basics.First, cv.Basics.Last)
 }
