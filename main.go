@@ -208,8 +208,5 @@ func main() {
 	check(err)
 
 	fmt.Printf("Parsed cv for %s %s from %s.\n", cv.Basics.First, cv.Basics.Last, basename)
-	header := text_header(cv)
 	check(err)
-	
-	fmt.Println(header)
 }
