@@ -30,6 +30,8 @@ func check(e error) {
 	}
 }
 
+// to_json formats a given Resume to JSON format.
+// The resulting files is written to 'filename'.
 func to_json(cv Resume, filename string) error {
 	out, err := json.Marshal(cv)
 	if err != nil {
@@ -41,6 +43,8 @@ func to_json(cv Resume, filename string) error {
 	return err
 } 
 
+// to_yaml formats a given Resume to YAML format.
+// The resulting files is written to 'filename'.
 func to_yaml(cv Resume, filename string) error {
 	out, err := yaml.Marshal(cv)
 	if err != nil {
@@ -52,6 +56,10 @@ func to_yaml(cv Resume, filename string) error {
 	return err
 } 
 
+// build_latex takes a Resume object and generates a nice Latex version.
+// You will need moderncv installed on your Tex distribution to compile the
+// resulting document. Publications are automatically extracted into a bibtex
+// file and included into the cv.
 func build_latex(cv Resume, name string) error {
 	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
 	fs := t_tmp.FuncMap{"join": strings.Join}
@@ -147,6 +155,10 @@ func text_header(cv Resume) string {
 	return out
 }
 
+// build_text generates a nice text version for the Resume object. 
+// If there is a text version of your picture (picture entry + .txt) it
+// will be included as ascii art in your cv. In a valid ascii art each line
+// of the file *must* have the same number of characters. 
 func build_text(cv Resume, name string) error {
 	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
 	fs := t_tmp.FuncMap{"join": strings.Join, "wrap": wrap}

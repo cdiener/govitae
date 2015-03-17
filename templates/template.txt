@@ -65,3 +65,6 @@ Publications
 Abstract: {{wrap .Summary}}
 Web: {{.Url}}
 {{end}}{{end}}
+
+
+# This resume is best viewed in a monospace font.
