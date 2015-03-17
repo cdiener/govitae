@@ -1,0 +1,97 @@
+basics:
+  first: Richard
+  last: Hendricks
+  label: Programmer
+  picture: rich
+  email: richard.hendricks@piedpiper.com
+  phone: (912) 555-4321
+  website: http://piedpiper.com
+  summary: I always knew I was missing something, and then when someone explained
+    the concept of ‘game’ I remember very distinctly thinking ‘That’s what I don’t
+    have.’
+  location:
+    address: 2712 Broadway St
+    postalcode: CA 94115
+    city: San Francisco
+    country: US
+    region: California
+  profiles:
+  - network: twitter
+    user: siliconhbo
+    url: ""
+  - network: soundcloud
+    user: dandymusicnl
+    url: https://soundcloud.com/dandymusicnl
+work:
+- company: Pied Piper
+  position: CEO/President
+  website: http://piedpiper.com
+  begin: 2013
+  end: 2014
+  summary: Pied Piper is a multi-platform technology based on a proprietary universal
+    compression algorithm that has consistently fielded high Weisman Scores™ that
+    are not merely competitive, but approach the theoretical limit of lossless compression.
+  highlights:
+  - Build an algorithm for artist to detect if their music was violating copy right
+    infringement laws
+  - Successfully won Techcrunch Disrupt
+  - Optimized an algorithm that holds the current world record for Weisman Scores
+volunteer:
+- organization: CoderDojo
+  position: Teacher
+  website: http://coderdojo.com/
+  begin: 2012
+  end: 2013
+  summary: Global movement of free coding clubs for young people.
+  highlights:
+  - Awarded 'Teacher of the Month'
+education:
+- institution: University of Oklahoma
+  area: Information Technology
+  title: Bachelor
+  begin: 2011
+  end: 2014
+  grade: 4.0
+  courses:
+  - DB1101 - Basic SQL
+  - CS2011 - Java Introduction
+awards:
+- title: Digital Compression Pioneer Award
+  date: 11/2014
+  institution: Techcrunch
+  summary: We can even compress 3D movies!
+publications:
+- authors:
+  - Richard Hendricks
+  - Ehrlich Bachman
+  title: Video compression for 3d media
+  publisher: Hooli
+  date: 2014
+  url: http://en.wikipedia.org/wiki/Silicon_Valley_(TV_series)
+  summary: Innovative middle-out compression algorithm that changes the way we store
+    data.
+skills:
+- name: Web Development
+  level: Master
+  keywords:
+  - HTML
+  - CSS
+  - Javascript
+- name: Compression
+  level: Master
+  keywords:
+  - Mpeg
+  - MP4
+  - GIF
+languages:
+- language: English
+  fluency: Native speaker
+interests:
+- name: Wildlife
+  keywords:
+  - Ferrets
+  - Unicorns
+references:
+- name: Erlich Bachman
+  quote: It is my pleasure to recommend Richard, his performance working as a consultant
+    for Main St. Company proved that he will be a valuable addition to any company.
