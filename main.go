@@ -98,9 +98,8 @@ func build_latex(cv Resume, name string) error {
 func wrap(s string) string {
 	splitsies := strings.Fields(s)
 	n := 0
-	for i, s := range splitsies {
-		if i==len(splitsies)-1 { continue }
-		n += len(s)
+	for i:=0; i<len(splitsies)-1; i++ {
+		n += len(splitsies[i])
 		if n>=WRAP_AFTER {
 			n = 0
 			splitsies[i] += "\n"

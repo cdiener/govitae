@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>soma.css</title>
+	<meta name="description" content="CV for {{.Basics.First}} {{.Basics.Last}}">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link href='//fonts.googleapis.com/css?family=Lato|Inconsolata' rel=stylesheet >
+    <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel=stylesheet>
+	<link href="//cdiener.github.io/soma/soma.css" rel=stylesheet>
+	<style type="text/css">
+	.hero {
+		width: 100%;
+		padding: 20px 0;
+		text-align: center;
+		font-size: 28px;
+		color: #fff;
+		background: url('bg.svg') repeat-y;
+		background-size: cover;
+		position: relative;
+		z-index: -1;
+	}
+	
+	.hero > h1 {
+		font: 50px Inconsolata, monospace;
+	}
+	
+	</style>
+</head>
+<body>
+<div class=container>
+<div class=row>
+<div class='col c2'></div>
+<div class='col c2'><img src='{{.Basics.Picture}}'></div>
+<div class='col c6'>
+<h2>{{.Basics.First}} {{.Basics.Last}}</h2>
+<table>
+<tr><td><strong>Address:</strong></td><td>{{.Basics.Location.Address}}</td></tr>
+<tr><td></td><td>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</td></tr>
+<tr><td></td><td>{{.Basics.Location.Country}}</td></tr>
+<tr><td><strong>Email:</strong></td><td>{{.Basics.Location.Email}}</td></tr>
+<tr><td><strong>Phone:</strong></td><td>{{.Basics.Location.Phone}}</td></tr>
+</table>
+</div>
+<div class='col c2'></div>
+</div></div>
+<div class=row>
+{{if .Work}}<h1>Work experience</h1>
+{{range .Work}}<div class=card>
+<h1>{{.Company}}</h1>
+<h2>{{.Position}}</h2>
+<h3>{{.Begin}} - {{.End}}</h3>
+<p class=serif>{{.Summary}}</p>
+{{if .Highlights}}<ul class=serif>
+<h2>Highlights:</h2>
+{{range .Highlights}} <li>{{.}}</li> 
+{{end}}</ul>{{end}}{{end}}
+</div>{{end}}
+
+{{if .Work}}<h1>Work experience</h1>
+{{range .Work}}<div class=card>
+<h1>{{.Institution}}</h1>
+<h2>{{.Title}} (Grade: {{.Grade}})</h2>
+<h3>{{.Begin}} - {{.End}}</h3>
+{{if .Courses}}<ul class=serif>
+<h2>Courses:</h2>
+{{range .Courses}} <li>{{.}}</li> 
+{{end}}</ul>{{end}}{{end}}
+</div>{{end}}
+
+{{if gt (len .Volunteer) 0}}------------
+Volunteering
+------------
+{{range .Volunteer}}
+{{.Position}} - {{.Organization}}
+{{.Begin}} - {{.End}}
+{{.Summary | wrap}}
+{{if gt (len .Highlights) 0}}
+Highlights:
+{{range .Highlights}} - {{.}} 
+{{end}}{{end}}{{end}}{{end}}
+{{if gt (len .Awards) 0}}------
+Awards
+------
+{{range .Awards}}
+{{.Title}} - {{.Institution}}
+{{.Date}}
+{{.Summary | wrap}}
+{{end}}{{end}}
+{{if gt (len .Skills) 0}}------
+Skills
+------
+{{range .Skills}}{{.Name}}: {{join .Keywords ", "}}
+{{end}}{{end}}
+{{if gt (len .Interests) 0}}---------
+Interests
+---------
+{{range .Interests}}{{.Name}}: {{join .Keywords ", "}}
+{{end}}{{end}}
+{{if gt (len .References) 0}}----------
+References
+----------
+{{range .References}}{{.Name}} 
+"{{wrap .Quote}}"
+{{end}}{{end}}
+{{if gt (len .Publications) 0}}------------
+Publications
+------------
+{{range .Publications}}
+{{join .Authors ", "}} 
+"{{.Title}}"
+{{.Date}}, {{.Publisher}}
+Abstract: {{wrap .Summary}}
+Web: {{.Url}}
+{{end}}{{end}}
+</div>
+</body>
