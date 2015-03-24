@@ -19,9 +19,9 @@ basics:
   - network: twitter
     user: siliconhbo
     url: ""
-  - network: soundcloud
-    user: dandymusicnl
-    url: https://soundcloud.com/dandymusicnl
+  - network: facebook
+    user: siliconhbo
+    url: ""
 work:
 - company: Pied Piper
   position: CEO/President

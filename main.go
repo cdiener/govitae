@@ -17,7 +17,7 @@ import (
 	"path"
 	"strings"
 	t_tmp "text/template"
-	//h_tmp "html/template"
+	h_tmp "html/template"
 )
 
 const TEMPLATE_PATH = "src/github.com/cdiener/govitae/templates"
@@ -181,6 +181,47 @@ func build_text(cv Resume, name string) error {
 	return nil
 }
 
+func findpic(pic_path string) string {
+	var err error
+	exts := []string{".jpg",".png",".svg"}
+	found := ""
+	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
+	
+	for _, s := range exts {
+		if _, err = os.Stat(pic_path+s); err == nil {
+			found = pic_path+s
+		}
+	}
+	
+	if len(found)>0 { 
+		return found 
+	} else { 
+		png, _ := ioutil.ReadFile(path.Join(dir, "template.png"))
+		ioutil.WriteFile("default.png", png, 0600)
+		return "default.png"
+	}
+}
+
+func build_html(cv Resume, name string) error {
+	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
+	fs := h_tmp.FuncMap{"join": strings.Join, "findpic": findpic}
+	t := h_tmp.Must(h_tmp.New("template.html").Funcs(fs).
+			ParseFiles(path.Join(dir, "template.html")))
+
+	file, err := os.Create(fmt.Sprintf("%s.html", name))
+	defer file.Close()
+	if err != nil {
+		return err
+	}
+
+	err = t.Execute(file, cv)
+	if err != nil {
+		return err
+	}
+	
+	return nil
+}
+
 func main() {
 
 	if len(os.Args) < 2 {
@@ -204,6 +245,8 @@ func main() {
 	err = build_latex(cv, name)
 	check(err)
 	err = build_text(cv, name)
+	check(err)
+	err = build_html(cv, name)
 	check(err)
 
 	fmt.Printf("Parsed cv for %s %s from %s.\n", cv.Basics.First, cv.Basics.Last, basename)

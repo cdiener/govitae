@@ -3,116 +3,129 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>soma.css</title>
+	<title>Resume</title>
 	<meta name="description" content="CV for {{.Basics.First}} {{.Basics.Last}}">
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
     <link href='//fonts.googleapis.com/css?family=Lato|Inconsolata' rel=stylesheet >
     <link href='//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css' rel=stylesheet>
-	<link href="//cdiener.github.io/soma/soma.css" rel=stylesheet>
+	<link href='//cdiener.github.io/soma/soma.css' rel=stylesheet>
 	<style type="text/css">
-	.hero {
+	img {
+		display: block;
 		width: 100%;
-		padding: 20px 0;
-		text-align: center;
-		font-size: 28px;
-		color: #fff;
-		background: url('bg.svg') repeat-y;
-		background-size: cover;
-		position: relative;
-		z-index: -1;
+		max-width: 100%;
+		margin: auto;
+		padding-top: 1.5em;
+	}
+	@media (max-width:870px){
+		img { 
+			padding: 0; 
+			width: 80%;
+		}
 	}
 	
-	.hero > h1 {
-		font: 50px Inconsolata, monospace;
-	}
+	.twitter { background: #2be; }
+	.twitter:hover { background: #3cf; }
 	
+	.gray { color: #999; }
 	</style>
 </head>
 <body>
 <div class=container>
 <div class=row>
-<div class='col c2'></div>
-<div class='col c2'><img src='{{.Basics.Picture}}'></div>
-<div class='col c6'>
-<h2>{{.Basics.First}} {{.Basics.Last}}</h2>
+<div class='col c2'>&nbsp;</div>
+<div class='col c2'><img src='{{findpic .Basics.Picture}}'></div>
+<div class='col c4'>
+<h2>{{.Basics.First}} <span class=gray>{{.Basics.Last}}</span></h2>
 <table>
-<tr><td><strong>Address:</strong></td><td>{{.Basics.Location.Address}}</td></tr>
+<tr><td><strong>Address:&nbsp;</strong></td><td>{{.Basics.Location.Address}}</td></tr>
 <tr><td></td><td>{{.Basics.Location.PostalCode}} {{.Basics.Location.City}}</td></tr>
 <tr><td></td><td>{{.Basics.Location.Country}}</td></tr>
-<tr><td><strong>Email:</strong></td><td>{{.Basics.Location.Email}}</td></tr>
-<tr><td><strong>Phone:</strong></td><td>{{.Basics.Location.Phone}}</td></tr>
+<tr><td><strong>Email:</strong></td><td>{{.Basics.Email}}</td></tr>
+<tr><td><strong>Phone:</strong></td><td>{{.Basics.Phone}}</td></tr>
 </table>
 </div>
-<div class='col c2'></div>
-</div></div>
+<div class='col c4'>
+{{range .Basics.Profiles}}
+{{if eq .Network "twitter"}}<a href='//twitter.com/@{{.User}}' class='btn badge twitter'><i class='fa fa-twitter'></i></a>{{end}}
+{{if eq .Network "github"}}<a href='//github.com/{{.User}}' class='btn badge blue'><i class='fa fa-github'></i></a>{{end}}
+{{if eq .Network "linkedin"}}<a href='//linkedin.com/{{.User}}' class='btn badge green'><i class='fa fa-linkedin'></i></a>{{end}}
+{{if eq .Network "facebook"}}<a href='//facebook.com/{{.User}}' class='btn badge blue'><i class='fa fa-facebook'></i></a>{{end}}{{end}}
+</div>
+</div>
 <div class=row>
-{{if .Work}}<h1>Work experience</h1>
+<div class='col c1'>&nbsp;</div>
+<div class='col c10'>
+{{if .Work}}<h2 class=underline>Work experience</h2>
 {{range .Work}}<div class=card>
+<div class=items><a href={{.Website}} class='btn badge sm blue'><i class='fa fa-globe'></i></a></div>
 <h1>{{.Company}}</h1>
 <h2>{{.Position}}</h2>
 <h3>{{.Begin}} - {{.End}}</h3>
 <p class=serif>{{.Summary}}</p>
-{{if .Highlights}}<ul class=serif>
-<h2>Highlights:</h2>
+{{if .Highlights}}<h2>Highlights:</h2>
+<ul class=serif>
 {{range .Highlights}} <li>{{.}}</li> 
 {{end}}</ul>{{end}}{{end}}
 </div>{{end}}
 
-{{if .Work}}<h1>Work experience</h1>
-{{range .Work}}<div class=card>
+{{if .Education}}<h2 class=underline>Education</h2>
+{{range .Education}}<div class=card>
 <h1>{{.Institution}}</h1>
-<h2>{{.Title}} (Grade: {{.Grade}})</h2>
+<h2>{{.Title}} {{if .Grade}}(Grade: {{.Grade}}){{end}}</h2>
 <h3>{{.Begin}} - {{.End}}</h3>
-{{if .Courses}}<ul class=serif>
-<h2>Courses:</h2>
+{{if .Courses}}<br><h2>Courses:</h2>
+<ul class=serif>
 {{range .Courses}} <li>{{.}}</li> 
 {{end}}</ul>{{end}}{{end}}
 </div>{{end}}
 
-{{if gt (len .Volunteer) 0}}------------
-Volunteering
-------------
-{{range .Volunteer}}
-{{.Position}} - {{.Organization}}
-{{.Begin}} - {{.End}}
-{{.Summary | wrap}}
-{{if gt (len .Highlights) 0}}
-Highlights:
-{{range .Highlights}} - {{.}} 
-{{end}}{{end}}{{end}}{{end}}
-{{if gt (len .Awards) 0}}------
-Awards
-------
-{{range .Awards}}
-{{.Title}} - {{.Institution}}
-{{.Date}}
-{{.Summary | wrap}}
-{{end}}{{end}}
-{{if gt (len .Skills) 0}}------
-Skills
-------
-{{range .Skills}}{{.Name}}: {{join .Keywords ", "}}
-{{end}}{{end}}
-{{if gt (len .Interests) 0}}---------
-Interests
----------
-{{range .Interests}}{{.Name}}: {{join .Keywords ", "}}
-{{end}}{{end}}
-{{if gt (len .References) 0}}----------
-References
-----------
-{{range .References}}{{.Name}} 
-"{{wrap .Quote}}"
-{{end}}{{end}}
-{{if gt (len .Publications) 0}}------------
-Publications
-------------
-{{range .Publications}}
-{{join .Authors ", "}} 
-"{{.Title}}"
-{{.Date}}, {{.Publisher}}
-Abstract: {{wrap .Summary}}
-Web: {{.Url}}
+{{if .Volunteer}}<h2 class=underline>Volunteering</h2>
+{{range .Volunteer}}<div class=card>
+<div class=items><a href={{.Website}} class='btn badge sm blue'><i class='fa fa-globe'></i></a></div>
+<h1>{{.Organization}}</h1>
+<h2>{{.Position}}</h2>
+<h3>{{.Begin}} - {{.End}}</h3>
+<p class=serif>{{.Summary}}</p>
+{{if .Highlights}}<h2>Highlights:</h2>
+<ul class=serif>
+{{range .Highlights}} <li>{{.}}</li> 
+{{end}}</ul>{{end}}{{end}}
+</div>{{end}}
+
+{{if .Awards}}<h2 class=underline>Awards</h2>
+{{range .Awards}}<div class=card>
+<h1>{{.Title}}</h1>
+<h2>{{.Institution}}</h2>
+<h3>{{.Date}}</h3>
+<p class=serif>{{.Summary}}</p>
+</div>{{end}}{{end}}
+
+{{if .Skills}}<h2 class=underline>Skills</h2>
+<ul>
+{{range .Skills}}<li><strong>{{.Name}}:</strong> {{join .Keywords ", "}}</li>
+{{end}}</ul>{{end}}
+
+{{if .Interests}}<h2 class=underline>Interests</h2>
+<ul>
+{{range .Interests}}<li><strong>{{.Name}}:</strong> {{join .Keywords ", "}}</li>
+{{end}}</ul>{{end}}
+
+{{if .References}}<h2 class=underline>Testimonials</h2>
+{{range .References}}<div class=card>
+<h1>{{.Name}}</h1> 
+<p class=serif>"{{.Quote}}"</p>
+</div>{{end}}{{end}}
+
+{{if .Publications}}<h2 class=underline>Publications</h2>
+{{range .Publications}}<div class=card>
+<div class=items><a href={{.Url}} class='btn badge sm blue'><i class='fa fa-globe'></i></a></div>
+<h1>{{.Title}}</h1>
+<h2>{{join .Authors ", "}}</h2>
+<h3>{{.Date}}, {{.Publisher}}</h3>
+<p class=serif>{{.Summary}}</p>
+</div>
 {{end}}{{end}}
 </div>
+<div class='col c1'>&nbsp;</div></div></div>
 </body>
