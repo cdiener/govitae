@@ -24,21 +24,39 @@ Write your cv once in JSON or YAML and have it rendered by govitae in various fo
 - a minimal but stylish text version
 - a good looking Latex version which you can compile to pdf
 
+The text, HTML and pdf version look something like this:
+![sample output](examples/output.png)
+
 How to install and use
 --------------------
 
 For now you can install a development version, meaning you need to 
 [install Go](https://golang.org/doc/install). After installing and setting
-your $GOPATH you can get govitae with
+your $GOPATH and (if you want to your bin) for instance with
+
+```bash
+export GOPATH=$HOME/code/go
+export PATH=$PATH:$HOME/code/go/bin
+```
+
+you can get govitae with
 
 ```go
 go get github.com/cdiener/govitae
 go install github.com/cdiener/govitae
 ```
 
-Use the `resume.json` or `minimal.json` as a starting point to build your
+Use the `resume.{yaml,json}` or `minimal.{yaml,json}` as a starting point to build your
 own and render with
 
 ```go
-govitae my_cv.json
+govitae resume.yaml
+```
+
+In order to compile the Latex version you will need the moderncv package. It comes
+with most "extra" packages for the Latex environment. This will allow you to generate
+the PDF with
+
+```bash
+pdflatex resume.tex
 ```
