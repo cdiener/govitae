@@ -11,7 +11,7 @@ Current status
 - [x] YAML parser working
 - [x] text output working
 - [x] Latex output working
-- [ ] HTML output working
+- [x] HTML output working
 
 What it does
 -----------
@@ -25,11 +25,17 @@ Write your cv once in JSON or YAML and have it rendered by govitae in various fo
 How to install and use
 --------------------
 
+For now you can install a development version, meaning you need to 
+[install Go](https://golang.org/doc/install). After installing and setting
+your $GOPATH you can get govitae with
+
 ```go
 go get github.com/cdiener/govitae
+go install github.com/cdiener/govitae
 ```
 
-Use the `resume.json` or `minimal.json` as a starting point and render with
+Use the `resume.json` or `minimal.json` as a starting point to build your
+own and render with
 
 ```go
 govitae my_cv.json
