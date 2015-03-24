@@ -12,6 +12,8 @@ Current status
 - [x] text output working
 - [x] Latex output working
 - [x] HTML output working
+- [] better default install for templates and examples
+- [] binary versions
 
 What it does
 -----------
