@@ -16,11 +16,12 @@ import (
 	"os"
 	"path"
 	"strings"
+  "flag"
 	t_tmp "text/template"
 	h_tmp "html/template"
 )
 
-const TEMPLATE_PATH = "src/github.com/cdiener/govitae/templates"
+var TEMPLATE_PATH string
 const SPACER = "    "
 const WRAP_AFTER = 60
 
@@ -61,7 +62,7 @@ func to_yaml(cv Resume, filename string) error {
 // resulting document. Publications are automatically extracted into a bibtex
 // file and included into the cv.
 func build_latex(cv Resume, name string) error {
-	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
+	dir := TEMPLATE_PATH
 	fs := t_tmp.FuncMap{"join": strings.Join}
 	t := t_tmp.Must(t_tmp.New("template.tex").Delims("#(", ")#").
 		Funcs(fs).ParseFiles(path.Join(dir, "template.tex")))
@@ -159,7 +160,7 @@ func text_header(cv Resume) string {
 // will be included as ascii art in your cv. In a valid ascii art each line
 // of the file *must* have the same number of characters. 
 func build_text(cv Resume, name string) error {
-	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
+	dir := TEMPLATE_PATH
 	fs := t_tmp.FuncMap{"join": strings.Join, "wrap": wrap}
 	t := t_tmp.Must(t_tmp.New("template.txt").Funcs(fs).
 			ParseFiles(path.Join(dir, "template.txt")))
@@ -185,7 +186,7 @@ func findpic(pic_path string) string {
 	var err error
 	exts := []string{".jpg",".png",".svg"}
 	found := ""
-	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
+	dir := TEMPLATE_PATH
 	
 	for _, s := range exts {
 		if _, err = os.Stat(pic_path+s); err == nil {
@@ -203,7 +204,7 @@ func findpic(pic_path string) string {
 }
 
 func build_html(cv Resume, name string) error {
-	dir := path.Join(os.Getenv("GOPATH"), TEMPLATE_PATH)
+	dir := TEMPLATE_PATH
 	fs := h_tmp.FuncMap{"join": strings.Join, "findpic": findpic}
 	t := h_tmp.Must(h_tmp.New("template.html").Funcs(fs).
 			ParseFiles(path.Join(dir, "template.html")))
@@ -223,15 +224,22 @@ func build_html(cv Resume, name string) error {
 }
 
 func main() {
-
-	if len(os.Args) < 2 {
+  
+  flag.StringVar(&TEMPLATE_PATH, "temp-dir", 
+      path.Join(os.Getenv("HOME"), ".config/govitae"), 
+      "Location of the template files.")
+  flag.Parse()
+  fmt.Println("Template path:", TEMPLATE_PATH)
+  args := flag.Args()
+  
+	if len(flag.Args()) < 1 {
 		panic("Need a file to parse :(")
 	}
 
-	text, err := ioutil.ReadFile(os.Args[1])
+	text, err := ioutil.ReadFile(args[0])
 	check(err)
 	
-	basename := strings.ToLower(path.Base(os.Args[1]))
+	basename := strings.ToLower(path.Base(args[0]))
 	name := strings.TrimSuffix( basename, path.Ext(basename) )
 
 	var cv Resume
@@ -249,6 +257,7 @@ func main() {
 	err = build_html(cv, name)
 	check(err)
 
-	fmt.Printf("Parsed cv for %s %s from %s.\n", cv.Basics.First, cv.Basics.Last, basename)
+	fmt.Printf("Parsed cv for %s %s from %s.\n", cv.Basics.First, cv.Basics.Last, 
+    basename)
 	check(err)
 }

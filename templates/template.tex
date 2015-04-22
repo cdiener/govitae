@@ -39,8 +39,8 @@
 \social[#(.Network)#]{#(.User)#} 
 #(end)# #(end)#                           
 \extrainfo{additional information}                 % optional, remove / comment the line if not wanted
-\photo[64pt][0.4pt]{#(.Picture)#}                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
-\quote{#(.Summary)#}                                 % optional, remove / comment the line if not wanted
+#(if .Picture)#\photo[64pt][0.4pt]{#(.Picture)#}#(end)#                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
+#(if .Summary)#\quote{#(.Summary)#}#(end)#                                 % optional, remove / comment the line if not wanted
 #(end)#
 % to show numerical labels in the bibliography (default is to show no labels); only useful if you make citations in your resume
 %\makeatletter
@@ -91,7 +91,7 @@ Highlights:%
 #(end)#\end{itemize}}
 #(end)##(end)##(end)#
 
-#(if gt (len .Awards) 0)#\section{Awards}
+#(if gt (len .Awards) 0)#\section{Awards \& Scholarships}
 
 #(range .Awards)#
 \cventry{#(.Date)#}{#(.Title)#}{#(.Institution)#}{}{}{#(.Summary)#}
