@@ -1,16 +1,16 @@
 
-{{if gt (len .Work) 0}}---------------
+{{if .Work}}---------------
 Work Experience
 ---------------
 {{range .Work}}
 {{.Position}} - {{.Company}}
 {{.Begin}} - {{.End}}
 {{.Summary | wrap}}
-{{if gt (len .Highlights) 0}}
+{{if .Highlights}}
 Highlights:
 {{range .Highlights}} - {{.}} 
 {{end}}{{end}}{{end}}{{end}}
-{{if gt (len .Education) 0}}---------
+{{if .Education}}---------
 Education
 ---------
 {{range .Education}}
@@ -20,7 +20,7 @@ Education
 Courses:
 {{range .Courses}} - {{.}} 
 {{end}}{{end}}{{end}}{{end}}
-{{if gt (len .Volunteer) 0}}------------
+{{if .Volunteer}}------------
 Volunteering
 ------------
 {{range .Volunteer}}
@@ -31,7 +31,7 @@ Volunteering
 Highlights:
 {{range .Highlights}} - {{.}} 
 {{end}}{{end}}{{end}}{{end}}
-{{if gt (len .Awards) 0}}------
+{{if .Awards}}------
 Awards
 ------
 {{range .Awards}}
@@ -42,13 +42,15 @@ Awards
 {{if gt (len .Skills) 0}}------
 Skills
 ------
-{{range .Skills}}{{.Name}}: {{join .Keywords ", "}}
-{{end}}{{end}}
+{{range .Skills}}{{.Name}}{{if .Keywords}}:
+{{range .Keywords}} - {{.}}
+{{end}}{{end}}{{end}}{{end}}
 {{if gt (len .Interests) 0}}---------
 Interests
 ---------
-{{range .Interests}}{{.Name}}: {{join .Keywords ", "}}
-{{end}}{{end}}
+{{range .Interests}}{{.Name}}{{if .Keywords}}:
+{{range .Keywords}} - {{.}}
+{{end}}{{end}}{{end}}{{end}}
 {{if gt (len .References) 0}}----------
 References
 ----------
@@ -61,8 +63,8 @@ Publications
 {{range .Publications}}
 {{join .Authors ", "}} 
 "{{.Title}}"
-{{.Date}}, {{.Publisher}}
-Abstract: {{wrap .Summary}}
+{{.Date}}, {{.Publisher}} 
+{{wrap .Summary}}
 Web: {{.Url}}
 {{end}}{{end}}
 
