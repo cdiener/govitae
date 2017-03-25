@@ -7,7 +7,7 @@
 % available at http://www.latex-project.org/lppl/.
 
 
-\documentclass[11pt,letterpaper,sans]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
+\documentclass[11pt,letterpaper,sans,spanish]{moderncv}        % possible options include font size ('10pt', '11pt' and '12pt'), paper size ('a4paper', 'letterpaper', 'a5paper', 'legalpaper', 'executivepaper' and 'landscape') and font family ('sans' and 'roman')
 
 % moderncv themes
 \moderncvstyle{casual}                             % style options are 'casual' (default), 'classic', 'oldstyle' and 'banking'
@@ -59,51 +59,51 @@
 %-----       resume       ---------------------------------------------------------
 \makecvtitle
 
-#(if gt (len .Work) 0)#\section{Work Experience}
+#(if gt (len .Work) 0)#\section{Experiencia laboral}
 
 #(range .Work)#
 \cventry{#(.Begin)#--#(.End)#}{#(.Position)#}{#(.Company)#}{}{}{
 #(.Summary)#
 #(if gt (len .Highlights) 0)# \\[1ex]%
-Highlights:%
+Actividades:%
 \begin{itemize}%
 #(range .Highlights)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
-#(if gt (len .Education) 0)#\section{Education}
+#(if gt (len .Education) 0)#\section{Educación}
 #(range .Education)#
-\cventry{#(.Begin)#--#(.End)#}{#(.Title)#}{#(.Institution)#}{}{\textit{#(.Grade)#}}{#(if gt (len .Courses) 0)#Courses:
+\cventry{#(.Begin)#--#(.End)#}{#(.Title)#}{#(.Institution)#}{}{\textit{#(.Grade)#}}{#(if gt (len .Courses) 0)#Cursos:
 \begin{itemize}
 #(range .Courses)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
-#(if gt (len .Volunteer) 0)#\section{Volunteering}
+#(if gt (len .Volunteer) 0)#\section{Trabajo Voluntario}
 
 #(range .Volunteer)#
 \cventry{#(.Begin)#--#(.End)#}{#(.Position)#}{#(.Organization)#}{}{}{
 #(.Summary)#
 #(if gt (len .Highlights) 0)# \\[1ex]%
-Highlights:%
+Actividades:%
 \begin{itemize}%
 #(range .Highlights)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
-#(if gt (len .Awards) 0)#\section{Awards \& Scholarships}
+#(if gt (len .Awards) 0)#\section{Premios \& Becas}
 
 #(range .Awards)#
 \cventry{#(.Date)#}{#(.Title)#}{#(.Institution)#}{}{}{#(.Summary)#}
 #(end)##(end)#
 
 
-#(if gt (len .Awards) 0)#\section{Languages}
+#(if gt (len .Awards) 0)#\section{Lenguages}
 #(range .Languages)#
 \cvitem{#(.Language)#}{#(.Fluency)#}
 #(end)##(end)#
 
-#(if .Skills)#\section{Skills}
+#(if .Skills)#\section{Habilidades}
 #(range .Skills)#
 \cvitem{#(.Name)#}{#(if .Keywords)#
 \begin{itemize}
@@ -111,7 +111,7 @@ Highlights:%
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
-#(if .Interests)#\section{Interests}
+#(if .Interests)#\section{Intereses}
 #(range .Interests)#
 \cvitem{#(.Name)#}{#(if .Keywords)#
 \begin{itemize}
@@ -119,7 +119,7 @@ Highlights:%
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
-#(if gt (len .References) 0)#\section{References}
+#(if gt (len .References) 0)#\section{Referencias}
 #(range .References)#
 \cventry{}{#(.Name)#}{}{}{}{#(.Quote)#}
 #(end)##(end)#
