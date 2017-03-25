@@ -22,3 +22,16 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# Latex
+*.aux
+*.out
+*.pdf
+*.log
+*.tex
+*.bib
+
+# Output
+*.html
+*.txt
+govitae

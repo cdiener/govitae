@@ -1,4 +1,4 @@
-%% this file was modified from the origianl moderncv template 
+%% this file was modified from the origianl moderncv template
 %% start of file `template.tex'.
 %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
 %
@@ -35,9 +35,9 @@
 \email{#(.Email)#}                               % optional, remove / comment the line if not wanted
 #(if .Website)#\homepage{#(.Website)#}#(end)#                         % optional, remove / comment the line if not wanted
 #(range .Profiles)#
-#(if eq .Network "twitter" "github" "linkedin")# 
-\social[#(.Network)#]{#(.User)#} 
-#(end)# #(end)#                           
+#(if eq .Network "twitter" "github" "linkedin")#
+\social[#(.Network)#]{#(.User)#}
+#(end)# #(end)#
 %\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
 #(if .Picture)#\photo[64pt][0.4pt]{#(.Picture)#}#(end)#                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
 #(if .Summary)#\quote{#(.Summary)#}#(end)#                                 % optional, remove / comment the line if not wanted
@@ -67,7 +67,7 @@
 #(if gt (len .Highlights) 0)# \\[1ex]%
 Highlights:%
 \begin{itemize}%
-#(range .Highlights)# \item #(.)# 
+#(range .Highlights)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
@@ -75,7 +75,7 @@ Highlights:%
 #(range .Education)#
 \cventry{#(.Begin)#--#(.End)#}{#(.Title)#}{#(.Institution)#}{}{\textit{#(.Grade)#}}{#(if gt (len .Courses) 0)#Courses:
 \begin{itemize}
-#(range .Courses)# \item #(.)# 
+#(range .Courses)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
@@ -87,7 +87,7 @@ Highlights:%
 #(if gt (len .Highlights) 0)# \\[1ex]%
 Highlights:%
 \begin{itemize}%
-#(range .Highlights)# \item #(.)# 
+#(range .Highlights)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
@@ -107,7 +107,7 @@ Highlights:%
 #(range .Skills)#
 \cvitem{#(.Name)#}{#(if .Keywords)#
 \begin{itemize}
-#(range .Keywords)# \item #(.)# 
+#(range .Keywords)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
@@ -115,7 +115,7 @@ Highlights:%
 #(range .Interests)#
 \cvitem{#(.Name)#}{#(if .Keywords)#
 \begin{itemize}
-#(range .Keywords)# \item #(.)# 
+#(range .Keywords)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
