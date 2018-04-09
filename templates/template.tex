@@ -1,4 +1,4 @@
-%% this file was modified from the origianl moderncv template 
+%% this file was modified from the origianl moderncv template
 %% start of file `template.tex'.
 %% Copyright 2006-2013 Xavier Danaux (xdanaux@gmail.com).
 %
@@ -35,9 +35,9 @@
 \email{#(.Email)#}                               % optional, remove / comment the line if not wanted
 #(if .Website)#\homepage{#(.Website)#}#(end)#                         % optional, remove / comment the line if not wanted
 #(range .Profiles)#
-#(if eq .Network "twitter" "github" "linkedin")# 
-\social[#(.Network)#]{#(.User)#} 
-#(end)# #(end)#                           
+#(if eq .Network "twitter" "github" "linkedin")#
+\social[#(.Network)#]{#(.User)#}
+#(end)# #(end)#
 %\extrainfo{additional information}                 % optional, remove / comment the line if not wanted
 #(if .Picture)#\photo[64pt][0.4pt]{#(.Picture)#}#(end)#                       % optional, remove / comment the line if not wanted; '64pt' is the height the picture must be resized to, 0.4pt is the thickness of the frame around it (put it to 0pt for no frame) and 'picture' is the name of the picture file
 #(if .Summary)#\quote{#(.Summary)#}#(end)#                                 % optional, remove / comment the line if not wanted
@@ -59,46 +59,57 @@
 %-----       resume       ---------------------------------------------------------
 \makecvtitle
 
-#(if gt (len .Work) 0)#\section{Work Experience}
+#(if .Work)#\section{Work Experience}
 
 #(range .Work)#
 \cventry{#(.Begin)#--#(.End)#}{#(.Position)#}{#(.Company)#}{}{}{
 #(.Summary)#
-#(if gt (len .Highlights) 0)# \\[1ex]%
-Highlights:%
+#(if .Highlights)# \\[1ex]%
 \begin{itemize}%
-#(range .Highlights)# \item #(.)# 
+#(range .Highlights)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
 #(if gt (len .Education) 0)#\section{Education}
 #(range .Education)#
-\cventry{#(.Begin)#--#(.End)#}{#(.Title)#}{#(.Institution)#}{}{\textit{#(.Grade)#}}{#(if gt (len .Courses) 0)#Courses:
+\cventry{#(.Begin)#--#(.End)#}{#(.Title)#}{#(.Institution)#}{}{\textit{#(.Grade)#}}{#(if .Courses)#
+Courses:
 \begin{itemize}
-#(range .Courses)# \item #(.)# 
+#(range .Courses)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
-#(if gt (len .Volunteer) 0)#\section{Volunteering}
+#(if .Volunteer)#\section{Volunteering}
 
 #(range .Volunteer)#
 \cventry{#(.Begin)#--#(.End)#}{#(.Position)#}{#(.Organization)#}{}{}{
 #(.Summary)#
-#(if gt (len .Highlights) 0)# \\[1ex]%
-Highlights:%
+#(if .Highlights)# \\[1ex]%
 \begin{itemize}%
-#(range .Highlights)# \item #(.)# 
+#(range .Highlights)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
-#(if gt (len .Awards) 0)#\section{Awards \& Scholarships}
+#(if .Teaching)#\section{Teaching}
+
+#(range .Teaching)#
+\cventry{#(.Begin)#--#(.End)#}{#(.Position)#}{#(.Organization)#}{}{}{
+#(.Summary)#
+#(if .Topics)# \\[1ex]%
+Topics:%
+\begin{itemize}%
+#(range .Topics)# \item #(.)#
+#(end)#\end{itemize}
+#(end)#}#(end)##(end)#
+
+#(if .Awards)#\section{Awards \& Scholarships}
 
 #(range .Awards)#
 \cventry{#(.Date)#}{#(.Title)#}{#(.Institution)#}{}{}{#(.Summary)#}
 #(end)##(end)#
 
 
-#(if gt (len .Awards) 0)#\section{Languages}
+#(if .Languages)#\section{Languages}
 #(range .Languages)#
 \cvitem{#(.Language)#}{#(.Fluency)#}
 #(end)##(end)#
@@ -107,7 +118,7 @@ Highlights:%
 #(range .Skills)#
 \cvitem{#(.Name)#}{#(if .Keywords)#
 \begin{itemize}
-#(range .Keywords)# \item #(.)# 
+#(range .Keywords)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 
@@ -115,7 +126,7 @@ Highlights:%
 #(range .Interests)#
 \cvitem{#(.Name)#}{#(if .Keywords)#
 \begin{itemize}
-#(range .Keywords)# \item #(.)# 
+#(range .Keywords)# \item #(.)#
 #(end)#\end{itemize}
 #(end)#}#(end)##(end)#
 

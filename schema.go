@@ -8,6 +8,7 @@
 
 package main
 
+// Place describes an Address.
 type Place struct {
 	Address    string `json:"address"`
 	PostalCode string `json:"postalCode"`
@@ -19,7 +20,7 @@ type Place struct {
 type Profile struct {
 	Network string `json:"network"`
 	User    string `json:"username"`
-	Url     string `json:"url"`
+	URL     string `json:"url"`
 }
 
 type BasicInfo struct {
@@ -55,6 +56,16 @@ type VolunteerInfo struct {
 	Highlights   []string `json:"highlights"`
 }
 
+type TeachingInfo struct {
+	Organization string   `json:"organization"`
+	Position     string   `json:"position"`
+	Website      string   `json:"website"`
+	Begin        string   `json:"startDate"`
+	End          string   `json:"endDate"`
+	Summary      string   `json:"summary"`
+	Topics       []string `json:"topics"`
+}
+
 type EducationInfo struct {
 	Institution string   `json:"institution"`
 	Area        string   `json:"area"`
@@ -77,7 +88,7 @@ type Publication struct {
 	Title     string   `json:"name"`
 	Publisher string   `json:"publisher"`
 	Date      string   `json:"releaseDate"`
-	Url       string   `json:"website"`
+	URL       string   `json:"url"`
 	Summary   string   `json:"summary"`
 }
 
@@ -106,6 +117,7 @@ type Resume struct {
 	Basics       BasicInfo       `json:"basics"`
 	Work         []Workplace     `json:"work"`
 	Volunteer    []VolunteerInfo `json:"volunteer"`
+	Teaching     []TeachingInfo  `json:"teaching"`
 	Education    []EducationInfo `json:"education"`
 	Awards       []Award         `json:"awards"`
 	Publications []Publication   `json:"publications"`

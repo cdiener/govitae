@@ -17,21 +17,21 @@
 		margin: auto;
 		padding-top: 1.5em;
 	}
-	
+
     @media (max-width:870px){
-		img { 
-			padding: 0; 
+		img {
+			padding: 0;
 			width: 80%;
 		}
 	}
-	
+
     tr {
         valign: top;
     }
-    
+
 	.twitter { background: #2be; }
 	.twitter:hover { background: #3cf; }
-	
+
 	.gray { color: #999; }
 	</style>
 </head>
@@ -70,7 +70,7 @@
 <p class=serif>{{.Summary}}</p>
 {{if .Highlights}}<h2>Highlights:</h2>
 <ul class=serif>
-{{range .Highlights}} <li>{{.}}</li> 
+{{range .Highlights}} <li>{{.}}</li>
 {{end}}</ul>{{end}}</div>{{end}}{{end}}
 
 {{if .Education}}<h2 class=underline>Education</h2>
@@ -80,7 +80,7 @@
 <h3>{{.Begin}} - {{.End}}</h3>
 {{if .Courses}}<br><h2>Courses:</h2>
 <ul class=serif>
-{{range .Courses}} <li>{{.}}</li> 
+{{range .Courses}} <li>{{.}}</li>
 {{end}}</ul>{{end}}</div>{{end}}{{end}}
 
 {{if .Volunteer}}<h2 class=underline>Volunteering</h2>
@@ -92,7 +92,19 @@
 <p class=serif>{{.Summary}}</p>
 {{if .Highlights}}<h2>Highlights:</h2>
 <ul class=serif>
-{{range .Highlights}} <li>{{.}}</li> 
+{{range .Highlights}} <li>{{.}}</li>
+{{end}}</ul>{{end}}</div>{{end}}{{end}}
+
+{{if .Teaching}}<h2 class=underline>Teaching</h2>
+{{range .Teaching}}<div class=card>
+<div class=items><a href={{.Website}} class='btn badge sm blue'><i class='fa fa-globe'></i></a></div>
+<h1>{{.Organization}}</h1>
+<h2>{{.Position}}</h2>
+<h3>{{.Begin}} - {{.End}}</h3>
+<p class=serif>{{.Summary}}</p>
+{{if .Topics}}<h2>Topics:</h2>
+<ul class=serif>
+{{range .Topics}} <li>{{.}}</li>
 {{end}}</ul>{{end}}</div>{{end}}{{end}}
 
 {{if .Awards}}<h2 class=underline>Awards</h2>
@@ -115,13 +127,13 @@
 
 {{if .References}}<h2 class=underline>Testimonials</h2>
 {{range .References}}<div class=card>
-<h1>{{.Name}}</h1> 
+<h1>{{.Name}}</h1>
 <p class=serif>"{{.Quote}}"</p>
 </div>{{end}}{{end}}
 
 {{if .Publications}}<h2 class=underline>Publications</h2>
 {{range .Publications}}<div class=card>
-<div class=items><a href={{.Url}} class='btn badge sm blue'><i class='fa fa-globe'></i></a></div>
+<div class=items><a href={{.URL}} class='btn badge sm blue'><i class='fa fa-globe'></i></a></div>
 <h1>{{.Title}}</h1>
 <h2>{{join .Authors ", "}}</h2>
 <h3>{{.Date}}, {{.Publisher}}</h3>

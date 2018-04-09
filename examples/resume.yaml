@@ -2,7 +2,7 @@ basics:
   first: Richard
   last: Hendricks
   label: Programmer
-  picture: rich 
+  picture: rich
   email: richard.hendricks@piedpiper.com
   phone: (912) 555-4321
   website: http://piedpiper.com
@@ -45,6 +45,16 @@ volunteer:
   summary: Global movement of free coding clubs for young people.
   highlights:
   - Awarded 'Teacher of the Month'
+teaching:
+- organization: CoderDojo
+  position: Teacher
+  website: http://coderdojo.com/
+  begin: 2012
+  end: 2013
+  summary: Introductory classes on a wide variety of topics.
+  topics:
+  - Java for Application Backends
+  - Tabs vs. Spaces
 education:
 - institution: University of Oklahoma
   area: Information Technology
